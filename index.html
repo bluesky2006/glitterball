@@ -11,8 +11,11 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #000; /* fallback */
-    color: white; /* default fill if JS fails */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000; /* fallback if image fails */
+    color: white; /* default SVG fill if JS fails */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,12 +154,37 @@
     return color;
   }
 
-  // Set random background and SVG color
-  const backgroundColor = getRandomColor();
-  const svgColor = getRandomColor();
+  // Background image options (update paths as needed)
+  const backgrounds = [
+    "./backgrounds/bg1.jpeg",
+    "./backgrounds/bg2.jpeg",
+    "./backgrounds/bg3.jpeg",
+    "./backgrounds/bg4.jpeg",
+    "./backgrounds/bg5.jpeg",
+    "./backgrounds/bg6.jpeg",
+    "./backgrounds/bg7.jpeg",
+    "./backgrounds/bg8.jpeg",
+    "./backgrounds/bg9.jpeg",
+    "./backgrounds/bg10.jpeg",
+    "./backgrounds/bg11.jpeg",
+    "./backgrounds/bg12.jpeg",
+    "./backgrounds/bg13.jpeg",
+    "./backgrounds/bg14.jpeg",
+    "./backgrounds/bg15.jpeg",
+    "./backgrounds/bg16.jpeg",
+    "./backgrounds/bg17.jpeg",
+    "./backgrounds/bg18.jpeg",
+    "./backgrounds/bg19.jpeg",
+    "./backgrounds/bg20.jpeg"
+  ];
 
-  document.body.style.backgroundColor = backgroundColor;
-  document.body.style.color = svgColor; // sets 'currentColor' for inline SVG fills
+  // Choose random background image
+  const chosenBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+  document.body.style.backgroundImage = `url('${chosenBackground}')`;
+
+  // Set random SVG color
+  const svgColor = getRandomColor();
+  document.body.style.color = svgColor; // this affects 'currentColor' in SVG
 
   // Frame swap animation (simple 2-frame loop)
   let currentFrame = 1;
