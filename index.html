@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>g l i t t e r b a l l</title>
-    <link rel="stylesheet" href="https://use.typekit.net/nou3iun.css">
+    <link rel="stylesheet" href="https://use.typekit.net/nou3iun.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -34,7 +34,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-color: #000; /* fallback if image fails */
-        color: white; /* default SVG fill if JS fails */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,13 +56,14 @@
         font-family: "hello-bloomie-serif", serif;
         font-weight: 400;
         font-style: normal;
-        letter-spacing: 1px;
+        letter-spacing: 3px;
         animation: scroll-left 15s linear infinite;
+        padding-top: 12px; /* helps prevent top clipping */
       }
 
       @keyframes scroll-left {
         0% {
-          transform: translateX(100%);
+          transform: translateX(85%);
         }
         100% {
           transform: translateX(-100%);
@@ -80,7 +80,7 @@
         box-sizing: border-box;
       }
 
-      .visible {
+      .svg-frame.visible {
         display: flex;
       }
 
@@ -95,13 +95,66 @@
       .st0 {
         fill: currentColor;
       }
+
+      .scrolling-text span {
+        display: inline-block;
+        animation: wave 1s ease-in-out infinite;
+      }
+
+      .scrolling-text span:nth-child(4n + 1) {
+        animation-delay: 0s;
+      }
+
+      .scrolling-text span:nth-child(4n + 2) {
+        animation-delay: 0.2s;
+      }
+
+      .scrolling-text span:nth-child(4n + 3) {
+        animation-delay: 0.4s;
+      }
+
+      .scrolling-text span:nth-child(4n + 4) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="scrolling-wrapper">
       <div class="scrolling-text">
-        20th September 2025 • 8pm - 2am • £10 • Saxonvale Arts Club • 2A Church
-        Street • Frome • BA11 1PW
+        <span>2</span><span>0</span><span>t</span><span>h</span
+        ><span>&nbsp;</span><span>S</span><span>e</span><span>p</span
+        ><span>t</span><span>e</span><span>m</span><span>b</span><span>e</span
+        ><span>r</span><span>&nbsp;</span><span>2</span><span>0</span
+        ><span>2</span><span>5</span><span>&nbsp;</span><span>•</span
+        ><span>&nbsp;</span><span>8</span><span>p</span><span>m</span
+        ><span>&nbsp;</span><span>-</span><span>&nbsp;</span><span>2</span
+        ><span>a</span><span>m</span><span>&nbsp;</span><span>•</span
+        ><span>&nbsp;</span><span>£</span><span>1</span><span>0</span
+        ><span>&nbsp;</span><span>•</span><span>&nbsp;</span><span>S</span
+        ><span>a</span><span>x</span><span>o</span><span>n</span><span>v</span
+        ><span>a</span><span>l</span><span>e</span><span>&nbsp;</span
+        ><span>A</span><span>r</span><span>t</span><span>s</span
+        ><span>&nbsp;</span><span>C</span><span>l</span><span>u</span
+        ><span>b</span><span>&nbsp;</span><span>•</span><span>&nbsp;</span
+        ><span>2</span><span>A</span><span>&nbsp;</span><span>C</span
+        ><span>h</span><span>u</span><span>r</span><span>c</span><span>h</span
+        ><span>&nbsp;</span><span>S</span><span>t</span><span>r</span
+        ><span>e</span><span>e</span><span>t</span><span>&nbsp;</span
+        ><span>•</span><span>&nbsp;</span><span>F</span><span>r</span
+        ><span>o</span><span>m</span><span>e</span><span>&nbsp;</span
+        ><span>•</span><span>&nbsp;</span><span>B</span><span>A</span
+        ><span>1</span><span>1</span><span>&nbsp;</span><span>1</span
+        ><span>P</span><span>W</span>
       </div>
     </div>
 
@@ -308,26 +361,18 @@
       // Scroll listener for image change
       window.addEventListener("wheel", (e) => {
         if (isThrottled) return;
-        if (e.deltaY <= 20) return; // Ignore anything that's not a downward scroll
+
         isThrottled = true;
 
-        currentIndex = (currentIndex + 1) % backgrounds.length;
+        // Pick a completely random background index
+        const nextIndex = Math.floor(Math.random() * backgrounds.length);
+        currentIndex = nextIndex;
         setBackground(currentIndex);
 
         setTimeout(() => {
           isThrottled = false;
         }, 500);
       });
-
-      // Generate random hex color
-      function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
 
       // Frame swap animation
       let currentFrame = 1;
