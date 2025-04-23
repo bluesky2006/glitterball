@@ -4,55 +4,106 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>g l i t t e r b a l l</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-<style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #000; /* fallback if image fails */
-    color: white; /* default SVG fill if JS fails */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    <link rel="stylesheet" href="https://use.typekit.net/nou3iun.css">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #000; /* fallback if image fails */
+        color: white; /* default SVG fill if JS fails */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* prevents scrollbars from appearing */
+      }
 
-  .svg-frame {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
+      .scrolling-wrapper {
+        position: fixed;
+        bottom: 2rem;
+        width: 100vw;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 10;
+      }
 
-  .visible {
-    display: flex;
-  }
+      .scrolling-text {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 2rem;
+font-family: "hello-bloomie-serif", serif;
+font-weight: 400;
+font-style: normal;
+        animation: scroll-left 15s linear infinite;
+      }
 
-  .svg-frame svg {
-    width: 100%;
-    max-width: 800px;
-    max-height: 120vh;
-    height: auto;
-    display: block;
-  }
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
 
-  .st0 {
-    fill: currentColor;
-  }
-</style>
+      .svg-frame {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+        box-sizing: border-box;
+      }
+
+      .visible {
+        display: flex;
+      }
+
+      .svg-frame svg {
+        width: 100%;
+        max-width: 800px;
+        max-height: 120vh;
+        height: auto;
+        display: block;
+      }
+
+      .st0 {
+        fill: currentColor;
+      }
+    </style>
   </head>
   <body>
+    <div class="scrolling-wrapper">
+      <div class="scrolling-text">
+        20th September 2025 • 8pm - 2am • £10 • Saxonvale Arts Club • 2A Church
+        Street • Frome • BA11 1PW
+      </div>
+    </div>
+
     <!-- Frame 1 -->
     <div id="frame1" class="svg-frame visible">
       <svg
@@ -147,115 +198,147 @@
       </svg>
     </div>
 
-<script>
-  // Random color generator
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+    <script>
+      // Random color generator
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
 
-  // Background image options (update paths as needed)
-  const backgrounds = [
-    "./backgrounds/bg1.jpeg",
-    "./backgrounds/bg2.jpeg",
-    "./backgrounds/bg3.jpeg",
-    "./backgrounds/bg4.jpeg",
-    "./backgrounds/bg5.jpeg",
-    "./backgrounds/bg6.jpeg",
-    "./backgrounds/bg7.jpeg",
-    "./backgrounds/bg8.jpeg",
-    "./backgrounds/bg9.jpeg",
-    "./backgrounds/bg10.jpeg",
-    "./backgrounds/bg11.jpeg",
-    "./backgrounds/bg12.jpeg",
-    "./backgrounds/bg13.jpeg",
-    "./backgrounds/bg14.jpeg",
-    "./backgrounds/bg15.jpeg",
-    "./backgrounds/bg16.jpeg",
-    "./backgrounds/bg17.jpeg",
-    "./backgrounds/bg18.jpeg",
-    "./backgrounds/bg19.jpeg",
-    "./backgrounds/bg20.jpeg",
-    "./backgrounds/bg21.jpeg",
-    "./backgrounds/bg22.jpeg",
-    "./backgrounds/bg23.jpeg",
-    "./backgrounds/bg24.jpeg",
-    "./backgrounds/bg25.jpeg",
-    "./backgrounds/bg26.jpeg",
-    "./backgrounds/bg27.jpeg",
-    "./backgrounds/bg28.jpeg",
-    "./backgrounds/bg29.jpeg",
-    "./backgrounds/bg30.jpeg",
-    "./backgrounds/bg31.jpeg",
-    "./backgrounds/bg32.jpeg",
-    "./backgrounds/bg33.jpeg",
-    "./backgrounds/bg34.jpeg",
-    "./backgrounds/bg35.jpeg",
-    "./backgrounds/bg36.jpeg",
-    "./backgrounds/bg37.jpeg",
-    "./backgrounds/bg38.jpeg",
-    "./backgrounds/bg39.jpeg",
-    "./backgrounds/bg40.jpeg",
-    "./backgrounds/bg41.jpeg",
-    "./backgrounds/bg42.jpeg",
-    "./backgrounds/bg43.jpeg",
-    "./backgrounds/bg44.jpeg",
-    "./backgrounds/bg45.jpeg",
-    "./backgrounds/bg46.jpeg",
-    "./backgrounds/bg47.jpeg",
-    "./backgrounds/bg48.jpeg",
-    "./backgrounds/bg49.jpeg",
-    "./backgrounds/bg50.jpeg",
-    "./backgrounds/bg51.jpeg",
-    "./backgrounds/bg52.jpeg",
-    "./backgrounds/bg53.jpeg",
-    "./backgrounds/bg54.jpeg",
-    "./backgrounds/bg55.jpeg",
-    "./backgrounds/bg56.jpeg",
-    "./backgrounds/bg57.jpeg",
-    "./backgrounds/bg58.jpeg",
-    "./backgrounds/bg59.jpeg",
-    "./backgrounds/bg60.jpeg",
-    "./backgrounds/bg61.jpeg",
-    "./backgrounds/bg62.jpeg",
-    "./backgrounds/bg63.jpeg",
-    "./backgrounds/bg64.jpeg",
-    "./backgrounds/bg65.jpeg",
-    "./backgrounds/bg66.jpeg",
-    "./backgrounds/bg67.jpeg",
-    "./backgrounds/bg68.jpeg",
-    "./backgrounds/bg69.jpeg",
-    "./backgrounds/bg70.jpeg",
-    "./backgrounds/bg71.jpeg",
-    "./backgrounds/bg72.jpeg",
-    "./backgrounds/bg73.jpeg",
-    "./backgrounds/bg74.jpeg",
-    "./backgrounds/bg75.jpeg",
-    "./backgrounds/bg76.jpeg",
-    "./backgrounds/bg77.jpeg",
-    "./backgrounds/bg78.jpeg",
-    "./backgrounds/bg79.jpeg"
-  ];
+      // Background image options (update paths as needed)
+      const backgrounds = [
+        "./backgrounds/bg1.jpeg",
+        "./backgrounds/bg2.jpeg",
+        "./backgrounds/bg3.jpeg",
+        "./backgrounds/bg4.jpeg",
+        "./backgrounds/bg5.jpeg",
+        "./backgrounds/bg6.jpeg",
+        "./backgrounds/bg7.jpeg",
+        "./backgrounds/bg8.jpeg",
+        "./backgrounds/bg9.jpeg",
+        "./backgrounds/bg10.jpeg",
+        "./backgrounds/bg11.jpeg",
+        "./backgrounds/bg12.jpeg",
+        "./backgrounds/bg13.jpeg",
+        "./backgrounds/bg14.jpeg",
+        "./backgrounds/bg15.jpeg",
+        "./backgrounds/bg16.jpeg",
+        "./backgrounds/bg17.jpeg",
+        "./backgrounds/bg18.jpeg",
+        "./backgrounds/bg19.jpeg",
+        "./backgrounds/bg20.jpeg",
+        "./backgrounds/bg21.jpeg",
+        "./backgrounds/bg22.jpeg",
+        "./backgrounds/bg23.jpeg",
+        "./backgrounds/bg24.jpeg",
+        "./backgrounds/bg25.jpeg",
+        "./backgrounds/bg26.jpeg",
+        "./backgrounds/bg27.jpeg",
+        "./backgrounds/bg28.jpeg",
+        "./backgrounds/bg29.jpeg",
+        "./backgrounds/bg30.jpeg",
+        "./backgrounds/bg31.jpeg",
+        "./backgrounds/bg32.jpeg",
+        "./backgrounds/bg33.jpeg",
+        "./backgrounds/bg34.jpeg",
+        "./backgrounds/bg35.jpeg",
+        "./backgrounds/bg36.jpeg",
+        "./backgrounds/bg37.jpeg",
+        "./backgrounds/bg38.jpeg",
+        "./backgrounds/bg39.jpeg",
+        "./backgrounds/bg40.jpeg",
+        "./backgrounds/bg41.jpeg",
+        "./backgrounds/bg42.jpeg",
+        "./backgrounds/bg43.jpeg",
+        "./backgrounds/bg44.jpeg",
+        "./backgrounds/bg45.jpeg",
+        "./backgrounds/bg46.jpeg",
+        "./backgrounds/bg47.jpeg",
+        "./backgrounds/bg48.jpeg",
+        "./backgrounds/bg49.jpeg",
+        "./backgrounds/bg50.jpeg",
+        "./backgrounds/bg51.jpeg",
+        "./backgrounds/bg52.jpeg",
+        "./backgrounds/bg53.jpeg",
+        "./backgrounds/bg54.jpeg",
+        "./backgrounds/bg55.jpeg",
+        "./backgrounds/bg56.jpeg",
+        "./backgrounds/bg57.jpeg",
+        "./backgrounds/bg58.jpeg",
+        "./backgrounds/bg59.jpeg",
+        "./backgrounds/bg60.jpeg",
+        "./backgrounds/bg61.jpeg",
+        "./backgrounds/bg62.jpeg",
+        "./backgrounds/bg63.jpeg",
+        "./backgrounds/bg64.jpeg",
+        "./backgrounds/bg65.jpeg",
+        "./backgrounds/bg66.jpeg",
+        "./backgrounds/bg67.jpeg",
+        "./backgrounds/bg68.jpeg",
+        "./backgrounds/bg69.jpeg",
+        "./backgrounds/bg70.jpeg",
+        "./backgrounds/bg71.jpeg",
+        "./backgrounds/bg72.jpeg",
+        "./backgrounds/bg73.jpeg",
+        "./backgrounds/bg74.jpeg",
+        "./backgrounds/bg75.jpeg",
+        "./backgrounds/bg76.jpeg",
+        "./backgrounds/bg77.jpeg",
+        "./backgrounds/bg78.jpeg",
+        "./backgrounds/bg79.jpeg",
+      ];
 
-  // Choose random background image
-  const chosenBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-  document.body.style.backgroundImage = `url('${chosenBackground}')`;
+      // Random starting index
+      let currentIndex = Math.floor(Math.random() * backgrounds.length);
+      let isThrottled = false;
 
-  // Set random SVG color
-  const svgColor = getRandomColor();
-  document.body.style.color = svgColor; // this affects 'currentColor' in SVG
+      // Apply background image and SVG color
+      function setBackground(index) {
+        document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+        document.body.style.color = getRandomColor();
+      }
 
-  // Frame swap animation (simple 2-frame loop)
-  let currentFrame = 1;
-  setInterval(() => {
-    document.getElementById(`frame${currentFrame}`).classList.remove("visible");
-    currentFrame = currentFrame === 1 ? 2 : 1;
-    document.getElementById(`frame${currentFrame}`).classList.add("visible");
-  }, 500); // adjust speed here (milliseconds)
-</script>
+      setBackground(currentIndex); // Initial load
+
+      // Scroll listener for image change
+      window.addEventListener("wheel", (e) => {
+        if (isThrottled) return;
+        if (e.deltaY <= 20) return; // Ignore anything that's not a downward scroll
+        isThrottled = true;
+
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+        setBackground(currentIndex);
+
+        setTimeout(() => {
+          isThrottled = false;
+        }, 500);
+      });
+
+      // Generate random hex color
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Frame swap animation
+      let currentFrame = 1;
+      setInterval(() => {
+        document
+          .getElementById(`frame${currentFrame}`)
+          .classList.remove("visible");
+        currentFrame = currentFrame === 1 ? 2 : 1;
+        document
+          .getElementById(`frame${currentFrame}`)
+          .classList.add("visible");
+      }, 500);
+    </script>
   </body>
 </html>
