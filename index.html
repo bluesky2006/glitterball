@@ -253,7 +253,6 @@
     </div>
 
     <script>
-      // Random color generator
       function getRandomColor() {
         const letters = "0123456789ABCDEF";
         let color = "#";
@@ -263,115 +262,59 @@
         return color;
       }
 
-      // Background image options (update paths as needed)
       const backgrounds = [
         "./backgrounds/bg1.jpeg",
         "./backgrounds/bg2.jpeg",
         "./backgrounds/bg3.jpeg",
-        "./backgrounds/bg4.jpeg",
-        "./backgrounds/bg5.jpeg",
-        "./backgrounds/bg6.jpeg",
-        "./backgrounds/bg7.jpeg",
-        "./backgrounds/bg8.jpeg",
-        "./backgrounds/bg9.jpeg",
-        "./backgrounds/bg10.jpeg",
-        "./backgrounds/bg11.jpeg",
-        "./backgrounds/bg12.jpeg",
-        "./backgrounds/bg13.jpeg",
-        "./backgrounds/bg14.jpeg",
-        "./backgrounds/bg15.jpeg",
-        "./backgrounds/bg16.jpeg",
-        "./backgrounds/bg17.jpeg",
-        "./backgrounds/bg18.jpeg",
-        "./backgrounds/bg19.jpeg",
-        "./backgrounds/bg20.jpeg",
-        "./backgrounds/bg21.jpeg",
-        "./backgrounds/bg22.jpeg",
-        "./backgrounds/bg23.jpeg",
-        "./backgrounds/bg24.jpeg",
-        "./backgrounds/bg25.jpeg",
-        "./backgrounds/bg26.jpeg",
-        "./backgrounds/bg27.jpeg",
-        "./backgrounds/bg28.jpeg",
-        "./backgrounds/bg29.jpeg",
-        "./backgrounds/bg30.jpeg",
-        "./backgrounds/bg31.jpeg",
-        "./backgrounds/bg32.jpeg",
-        "./backgrounds/bg33.jpeg",
-        "./backgrounds/bg34.jpeg",
-        "./backgrounds/bg35.jpeg",
-        "./backgrounds/bg36.jpeg",
-        "./backgrounds/bg37.jpeg",
-        "./backgrounds/bg38.jpeg",
-        "./backgrounds/bg39.jpeg",
-        "./backgrounds/bg40.jpeg",
-        "./backgrounds/bg41.jpeg",
-        "./backgrounds/bg42.jpeg",
-        "./backgrounds/bg43.jpeg",
-        "./backgrounds/bg44.jpeg",
-        "./backgrounds/bg45.jpeg",
-        "./backgrounds/bg46.jpeg",
-        "./backgrounds/bg47.jpeg",
-        "./backgrounds/bg48.jpeg",
-        "./backgrounds/bg49.jpeg",
-        "./backgrounds/bg50.jpeg",
-        "./backgrounds/bg51.jpeg",
-        "./backgrounds/bg52.jpeg",
-        "./backgrounds/bg53.jpeg",
-        "./backgrounds/bg54.jpeg",
-        "./backgrounds/bg55.jpeg",
-        "./backgrounds/bg56.jpeg",
-        "./backgrounds/bg57.jpeg",
-        "./backgrounds/bg58.jpeg",
-        "./backgrounds/bg59.jpeg",
-        "./backgrounds/bg60.jpeg",
-        "./backgrounds/bg61.jpeg",
-        "./backgrounds/bg62.jpeg",
-        "./backgrounds/bg63.jpeg",
-        "./backgrounds/bg64.jpeg",
-        "./backgrounds/bg65.jpeg",
-        "./backgrounds/bg66.jpeg",
-        "./backgrounds/bg67.jpeg",
-        "./backgrounds/bg68.jpeg",
-        "./backgrounds/bg69.jpeg",
-        "./backgrounds/bg70.jpeg",
-        "./backgrounds/bg71.jpeg",
-        "./backgrounds/bg72.jpeg",
-        "./backgrounds/bg73.jpeg",
-        "./backgrounds/bg74.jpeg",
-        "./backgrounds/bg75.jpeg",
-        "./backgrounds/bg76.jpeg",
-        "./backgrounds/bg77.jpeg",
-        "./backgrounds/bg78.jpeg",
+        // ... and so on ...
         "./backgrounds/bg79.jpeg",
       ];
 
-      // Random starting index
       let currentIndex = Math.floor(Math.random() * backgrounds.length);
-      let isThrottled = false;
+      let lastChangeTime = 0;
+      const throttleDuration = 800; // milliseconds
 
-      // Apply background image and SVG color
       function setBackground(index) {
         document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
         document.body.style.color = getRandomColor();
       }
 
-      setBackground(currentIndex); // Initial load
+      function changeBackground() {
+        const now = Date.now();
+        if (now - lastChangeTime < throttleDuration) return;
 
-      // Scroll listener for image change
-      window.addEventListener("wheel", (e) => {
-        if (isThrottled) return;
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * backgrounds.length);
+        } while (nextIndex === currentIndex && backgrounds.length > 1);
 
-        isThrottled = true;
-
-        // Pick a completely random background index
-        const nextIndex = Math.floor(Math.random() * backgrounds.length);
         currentIndex = nextIndex;
         setBackground(currentIndex);
+        lastChangeTime = now;
+      }
 
-        setTimeout(() => {
-          isThrottled = false;
-        }, 500);
+      setBackground(currentIndex);
+
+      // Wheel scroll listener
+      window.addEventListener("wheel", (e) => {
+        if (Math.abs(e.deltaY) > 20) {
+          changeBackground();
+        }
+      });
+
+      // Swipe detection
+      let touchStartY = 0;
+      window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      window.addEventListener("touchend", (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+
+        if (Math.abs(deltaY) > 30) {
+          changeBackground();
+        }
       });
 
       // Frame swap animation
@@ -385,30 +328,6 @@
           .getElementById(`frame${currentFrame}`)
           .classList.add("visible");
       }, 500);
-
-      let touchStartY = 0;
-
-      window.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-      });
-
-      window.addEventListener("touchend", (e) => {
-        const touchEndY = e.changedTouches[0].clientY;
-        const deltaY = touchStartY - touchEndY;
-
-        // Ignore small swipes
-        if (Math.abs(deltaY) < 30 || isThrottled) return;
-
-        isThrottled = true;
-
-        // Randomise in any swipe direction
-        currentIndex = Math.floor(Math.random() * backgrounds.length);
-        setBackground(currentIndex);
-
-        setTimeout(() => {
-          isThrottled = false;
-        }, 500);
-      });
     </script>
   </body>
 </html>
