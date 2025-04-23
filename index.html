@@ -63,7 +63,7 @@
 
       @keyframes scroll-left {
         0% {
-          transform: translateX(85%);
+          transform: translateX(30%); /* Try 30–50% */
         }
         100% {
           transform: translateX(-100%);
@@ -385,6 +385,30 @@
           .getElementById(`frame${currentFrame}`)
           .classList.add("visible");
       }, 500);
+
+      let touchStartY = 0;
+
+      window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      window.addEventListener("touchend", (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+
+        // Ignore small swipes
+        if (Math.abs(deltaY) < 30 || isThrottled) return;
+
+        isThrottled = true;
+
+        // Randomise in any swipe direction
+        currentIndex = Math.floor(Math.random() * backgrounds.length);
+        setBackground(currentIndex);
+
+        setTimeout(() => {
+          isThrottled = false;
+        }, 500);
+      });
     </script>
   </body>
 </html>
