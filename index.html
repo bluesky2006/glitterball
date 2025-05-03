@@ -169,6 +169,30 @@
         transform: translateY(150px) rotate(15deg);
         opacity: 0;
       }
+
+      #refresh-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: black;
+        font-family: "hello-bloomie-serif", serif;
+        font-size: 26px; /* Adjust the font size here */
+        letter-spacing: 2px;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        pointer-events: auto;
+      }
     </style>
   </head>
   <body>
@@ -199,6 +223,10 @@
         ><span>1</span><span>1</span><span>&nbsp;</span><span>1</span
         ><span>P</span><span>W</span>
       </div>
+    </div>
+
+    <div id="refresh-popup" class="refresh-popup">
+      <span id="refresh-message"></span>
     </div>
 
     <div class="top-wrapper">
@@ -364,6 +392,10 @@
         }
       });
 
+      // Click or tap listener for background change
+      document.addEventListener("click", changeBackground);
+      document.addEventListener("touchstart", changeBackground);
+
       // Frame swap animation
       let currentFrame = 1;
       setInterval(() => {
@@ -405,6 +437,31 @@
         const space = document.createTextNode(" ");
         topText.appendChild(wordSpan);
         topText.appendChild(space);
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("refresh-popup");
+        const message = document.getElementById("refresh-message");
+
+        const isTouchDevice =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        message.textContent = isTouchDevice
+          ? "Tap to reload!"
+          : "Click to reload!";
+
+        const hidePopup = () => {
+          popup.style.opacity = "0";
+          popup.style.pointerEvents = "none";
+          setTimeout(() => {
+            popup.style.display = "none";
+          }, 500); // match the CSS transition duration
+        };
+
+        popup.addEventListener("click", hidePopup);
+        popup.addEventListener("touchstart", hidePopup);
+
+        // Auto-hide with fade after 5 seconds
+        setTimeout(hidePopup, 3000);
       });
     </script>
   </body>
