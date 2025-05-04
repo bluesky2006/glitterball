@@ -193,7 +193,7 @@
         transition: opacity 0.5s ease;
         pointer-events: auto;
         outline: 3px dashed #ffff80; /* Changed to dashed outline */
-        animation: rotateWiggle 0.66s infinite alternate ease-in-out;
+        animation: rotateWiggle 0.66s steps(2, end) infinite;
       }
 
       @keyframes rotateWiggle {
