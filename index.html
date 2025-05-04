@@ -447,8 +447,8 @@
         const isTouchDevice =
           "ontouchstart" in window || navigator.maxTouchPoints > 0;
         message.textContent = isTouchDevice
-          ? "Tap to reload!"
-          : "Click to reload!";
+          ? "Tap to refresh!"
+          : "Click to refresh!";
 
         const hidePopup = () => {
           popup.style.opacity = "0";
