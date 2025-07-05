@@ -1,0 +1,241 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000; /* fallback if image fails */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* prevents scrollbars from appearing */
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.scrolling-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  width: 100vw;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 2rem;
+  font-family: "hello-bloomie-serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 3px;
+  animation: scroll-left 15s linear infinite;
+  padding-top: 12px; /* helps prevent top clipping */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.svg-frame {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.svg-frame.visible {
+  display: flex;
+}
+
+.svg-frame svg {
+  width: 100%;
+  max-width: 800px;
+  max-height: 120vh;
+  height: auto;
+  display: block;
+}
+
+.st0 {
+  fill: currentColor;
+}
+
+.scrolling-text span {
+  display: inline-block;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.scrolling-text span:nth-child(4n + 1) {
+  animation-delay: 0s;
+}
+
+.scrolling-text span:nth-child(4n + 2) {
+  animation-delay: 0.2s;
+}
+
+.scrolling-text span:nth-child(4n + 3) {
+  animation-delay: 0.4s;
+}
+
+.scrolling-text span:nth-child(4n + 4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.top-wrapper {
+  position: fixed;
+  top: 2rem;
+  width: 100vw;
+  text-align: center;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.top-text {
+  display: inline-block;
+  font-size: 2.3rem;
+  /* font-family: "hello-bloomie-serif", serif; */
+  /* font-family: "helvetica", sans-serif;
+        font-weight: 800; */
+  font-family: "hello-bloomie-script", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 5px;
+  color: currentColor; /* Same as wavy text */
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .top-text {
+    font-size: 1.8rem; /* Adjust font size for mobile */
+    letter-spacing: 3px; /* Adjust letter spacing for mobile */
+  }
+}
+
+.word {
+  display: inline-block;
+  margin: 0 1px; /* adjust second value for space between words */
+}
+
+.letter {
+  display: inline-block;
+  transition: transform 0.9s ease, opacity 1s ease;
+  cursor: pointer;
+}
+
+.letter.fall {
+  transform: translateY(150px) rotate(15deg);
+  opacity: 0;
+}
+
+#refresh-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffff80;
+  color: black;
+  font-family: "hello-bloomie-serif", serif;
+  font-size: 26px; /* Adjust the font size here */
+  letter-spacing: 2px;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: auto;
+  outline: 3px dashed #ffff80; /* Changed to dashed outline */
+  animation: rotateWiggle 0.66s steps(2, end) infinite;
+}
+
+@keyframes rotateWiggle {
+  from {
+    transform: translate(-50%, -50%) rotate(-2deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(2deg);
+  }
+}
+
+#logo-link {
+  color: currentColor; /* or set a specific color if needed */
+  position: fixed;
+  bottom: 6rem;
+  display: inline-block;
+  width: 150px; /* adjust size as needed */
+  height: auto;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+#logo-link:hover {
+  transform: scale(1.1);
+}
+
+#logo-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#ticket-box {
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "hello-bloomie-serif", serif;
+  font-size: 26px; /* Adjust the font size here */
+  letter-spacing: 2px;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer; /* so people know it's clickable */
+  transition: transform 0.2s ease; /* smooth shift */
+}
+
+#ticket-box:hover {
+  transform: translate(-50%, -50%) translateY(-5px); /* lift up 5px */
+}
