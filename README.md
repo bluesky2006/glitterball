@@ -1,4 +1,4 @@
-🪩 glitterball
+# 🪩 glitterball
 A small, stylised website promoting Glitterball — a club night I co-run in Somerset.
 
 ## What is it?
