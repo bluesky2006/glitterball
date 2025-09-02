@@ -9,10 +9,7 @@ function getRandomColor() {
 }
 
 // === Generate Background Image Array ===
-const backgrounds = Array.from(
-  { length: 73 },
-  (_, i) => `./backgrounds/bg${i + 1}.jpeg`
-);
+const backgrounds = Array.from({ length: 73 }, (_, i) => `./backgrounds/bg${i + 1}.jpeg`);
 
 // === State Variables ===
 let currentIndex = Math.floor(Math.random() * backgrounds.length);
@@ -122,8 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const popup = document.getElementById("refresh-popup");
   const message = document.getElementById("refresh-message");
 
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
   message.textContent = isTouchDevice ? "Tap to refresh!" : "Click to refresh!";
 
   const hidePopup = () => {
@@ -139,3 +135,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setTimeout(hidePopup, 3000);
 });
+
+// === Insert scrolling text ===
+
+const eventDetails = {
+  date: "Saturday 20th September",
+  time: "8pm – 2am",
+  price: "£15",
+  location: "Snag Farm • Snag Lane • Wincanton • BA9 9PJ",
+};
+
+const text = `${eventDetails.date} • ${eventDetails.time} • ${eventDetails.price} • ${eventDetails.location}`;
+const container = document.getElementById("scrolling-text");
+
+container.innerHTML = ""; // Clear any existing content
+
+for (const char of text) {
+  const span = document.createElement("span");
+  span.innerHTML = char === " " ? "&nbsp;" : char;
+  container.appendChild(span);
+}
