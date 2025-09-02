@@ -142,7 +142,7 @@ const eventDetails = {
   date: "Saturday 20th September",
   time: "8pm – 2am",
   price: "£15",
-  location: "Snag Farm • Snag Lane • Wincanton • BA9 9PJ",
+  location: "Snag Farm • Snag Lane • BA9 9PJ",
 };
 
 const text = `${eventDetails.date} • ${eventDetails.time} • ${eventDetails.price} • ${eventDetails.location}`;
