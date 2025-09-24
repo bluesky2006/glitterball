@@ -17,6 +17,20 @@ let lastChangeTime = 0;
 const throttleDuration = 800; // ms
 let currentColor = "#FFFFFF"; // Default
 
+// === Determine contrast ===
+
+function getContrastColor(hex) {
+  hex = hex.replace("#", "");
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+
+  // relative luminance formula
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  return luminance > 0.5 ? "black" : "white";
+}
+
 // === Apply Background + Random Colour ===
 function setBackground(index) {
   const randomColor = getRandomColor();
@@ -24,11 +38,26 @@ function setBackground(index) {
   document.body.style.color = randomColor;
   currentColor = randomColor;
 
-  // ✅ Also update Tickets box to match
+  // ✅ Tickets box
   const ticketBox = document.getElementById("ticket-box");
   if (ticketBox) {
     ticketBox.style.backgroundColor = currentColor;
-    ticketBox.style.color = "white"; // Optional: ensure good contrast
+    ticketBox.style.color = "white";
+    ticketBox.style.outlineColor = currentColor;
+    setInterval(() => {
+      ticketBox.classList.add("wiggle");
+      setTimeout(() => {
+        ticketBox.classList.remove("wiggle");
+      }, 600); // match animation duration
+    }, 5000); // every 5s
+  }
+
+  // ✅ Refresh popup box + outline
+  const refreshPopup = document.getElementById("refresh-popup");
+  if (refreshPopup) {
+    refreshPopup.style.backgroundColor = currentColor;
+    refreshPopup.style.outlineColor = currentColor;
+    refreshPopup.style.color = getContrastColor(currentColor);
   }
 }
 
@@ -86,33 +115,36 @@ setInterval(() => {
 }, 500);
 
 // === Top Text Animation ===
-const words = ["another", "fine", "mess"];
 const topText = document.getElementById("topText");
 
-words.forEach((word) => {
-  const wordSpan = document.createElement("span");
-  wordSpan.className = "word";
+if (topText) {
+  const words = ["another", "fine", "mess"];
 
-  for (let letter of word) {
-    const letterSpan = document.createElement("span");
-    letterSpan.className = "letter";
-    letterSpan.textContent = letter;
+  words.forEach((word) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
 
-    letterSpan.addEventListener("mouseover", () => {
-      letterSpan.classList.add("fall");
+    for (let letter of word) {
+      const letterSpan = document.createElement("span");
+      letterSpan.className = "letter";
+      letterSpan.textContent = letter;
 
-      setTimeout(() => {
-        letterSpan.classList.remove("fall");
-      }, 3000);
-    });
+      letterSpan.addEventListener("mouseover", () => {
+        letterSpan.classList.add("fall");
 
-    wordSpan.appendChild(letterSpan);
-  }
+        setTimeout(() => {
+          letterSpan.classList.remove("fall");
+        }, 3000);
+      });
 
-  const space = document.createTextNode(" ");
-  topText.appendChild(wordSpan);
-  topText.appendChild(space);
-});
+      wordSpan.appendChild(letterSpan);
+    }
+
+    const space = document.createTextNode(" ");
+    topText.appendChild(wordSpan);
+    topText.appendChild(space);
+  });
+}
 
 // === Refresh Popup ===
 document.addEventListener("DOMContentLoaded", function () {
