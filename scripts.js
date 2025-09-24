@@ -86,33 +86,33 @@ setInterval(() => {
 }, 500);
 
 // === Top Text Animation ===
-// const words = ["another", "fine", "mess"];
-// const topText = document.getElementById("topText");
+const words = ["another", "fine", "mess"];
+const topText = document.getElementById("topText");
 
-// words.forEach((word) => {
-//   const wordSpan = document.createElement("span");
-//   wordSpan.className = "word";
+words.forEach((word) => {
+  const wordSpan = document.createElement("span");
+  wordSpan.className = "word";
 
-//   for (let letter of word) {
-//     const letterSpan = document.createElement("span");
-//     letterSpan.className = "letter";
-//     letterSpan.textContent = letter;
+  for (let letter of word) {
+    const letterSpan = document.createElement("span");
+    letterSpan.className = "letter";
+    letterSpan.textContent = letter;
 
-//     letterSpan.addEventListener("mouseover", () => {
-//       letterSpan.classList.add("fall");
+    letterSpan.addEventListener("mouseover", () => {
+      letterSpan.classList.add("fall");
 
-//       setTimeout(() => {
-//         letterSpan.classList.remove("fall");
-//       }, 3000);
-//     });
+      setTimeout(() => {
+        letterSpan.classList.remove("fall");
+      }, 3000);
+    });
 
-//     wordSpan.appendChild(letterSpan);
-//   }
+    wordSpan.appendChild(letterSpan);
+  }
 
-//   const space = document.createTextNode(" ");
-//   topText.appendChild(wordSpan);
-//   topText.appendChild(space);
-// });
+  const space = document.createTextNode(" ");
+  topText.appendChild(wordSpan);
+  topText.appendChild(space);
+});
 
 // === Refresh Popup ===
 document.addEventListener("DOMContentLoaded", function () {

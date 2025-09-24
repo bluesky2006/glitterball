@@ -10,19 +10,37 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
     <link rel="manifest" href="./favicon/site.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              bloomie: ["hello-bloomie-serif", "serif"],
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body>
     <!-- Pop-up box-->
-    <div id="refresh-popup" class="refresh-popup">
+    <div
+      id="refresh-popup"
+      class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-200 text-black font-bloomie text-[26px] tracking-[2px] px-6 py-4 rounded-lg flex justify-center items-center text-center shadow-lg opacity-100 pointer-events-auto outline-dashed outline-3 outline-yellow-200 animate-[wiggle_0.66s_steps(2,end)_infinite] z-[9999]"
+    >
       <span id="refresh-message"></span>
     </div>
 
     <!-- Another fine mess -->
-    <!-- <div class="top-wrapper">
-      <div class="top-text" id="topText"></div>
-    </div> -->
+    <div class="fixed top-8 w-screen text-center z-10 pointer-events-auto">
+      <div
+        id="topText"
+        class="inline-block text-[1.8rem] font-normal tracking-[5px] text-current font-[hello-bloomie-script] sm:text-[2.3rem]"
+      ></div>
+    </div>
 
-    <!-- Glittberball logo animation -->
+    <!-- Glitterball logo animation -->
     <!-- Frame 1 -->
     <div id="frame1" class="svg-frame visible">
       <svg
@@ -117,22 +135,20 @@
     </div>
 
     <!-- Ticket link -->
-    <!-- <div id="ticket-box">
-      <a
-        href="https://www.tickettailor.com/events/glitterball1/1737317"
-        target="_blank"
-        id="ticket-text"
-        >Tickets</a
-      >
-    </div> -->
+    <div
+      id="ticket-box"
+      class="fixed top-[75%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bloomie text-[26px] tracking-[2px] px-6 py-4 rounded-lg flex justify-center items-center text-center shadow-lg opacity-100 cursor-pointer transition-transform duration-200 hover:-translate-y-[5px]"
+    >
+      Tickets
+    </div>
 
-    <div id="logos-box">
+    <!-- Social logos -->
+    <div class="fixed bottom-28 flex flex-row items-center gap-8 z-[1000]">
       <!-- Mixcloud logo -->
       <a
         href="https://www.mixcloud.com/_Glitterball_/"
         target="_blank"
-        id="mixcloud-logo"
-        class="logo"
+        class="inline-block w-[165px] transition-transform duration-200 ease-in-out hover:scale-110 hover:text-current"
       >
         <svg viewBox="0 0 171 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -143,12 +159,12 @@
           />
         </svg>
       </a>
+
       <!-- Instagram logo -->
       <a
-        href="https://www.instagram.com/glitterballparty/"
+        href="https://www.instagram.com/_Glitterball_/"
         target="_blank"
-        id="insta-logo"
-        class="logo"
+        class="inline-block w-[30px] transition-transform duration-200 ease-in-out hover:scale-125 hover:text-current"
       >
         <svg viewBox="0 0 448 512" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -182,9 +198,12 @@
     </div>
 
     <!-- Scrolling text -->
-    <!-- <div class="scrolling-wrapper">
-      <div id="scrolling-text" class="scrolling-text"></div>
-    </div> -->
+    <div class="fixed bottom-8 w-screen overflow-hidden pointer-events-none z-10">
+      <div
+        id="scrolling-text"
+        class="inline-block whitespace-nowrap text-3xl font-bloomie font-normal tracking-[3px] animate-[scroll-left_15s_linear_infinite] pt-3"
+      ></div>
+    </div>
 
     <script src="scripts.js"></script>
   </body>

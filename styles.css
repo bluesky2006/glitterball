@@ -112,16 +112,16 @@ a:hover {
   }
 }
 
-/* .top-wrapper {
+.top-wrapper {
   position: fixed;
   top: 2rem;
   width: 100vw;
   text-align: center;
   z-index: 10;
   pointer-events: auto;
-} */
+}
 
-/* .top-text {
+.top-text {
   display: inline-block;
   font-size: 2.3rem;
   font-family: "hello-bloomie-serif", serif;
@@ -132,15 +132,15 @@ a:hover {
   font-style: normal;
   letter-spacing: 5px;
   color: currentColor;
-} */
+}
 
 /* For mobile devices */
-/* @media (max-width: 480px) {
+@media (max-width: 480px) {
   .top-text {
     font-size: 1.8rem;
     letter-spacing: 3px;
   }
-} */
+}
 
 .word {
   display: inline-block;
