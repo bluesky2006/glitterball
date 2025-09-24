@@ -74,6 +74,7 @@ a:hover {
   max-height: 120vh;
   height: auto;
   display: block;
+  transform: translateY(-4rem);
 }
 
 .st0 {
@@ -111,35 +112,35 @@ a:hover {
   }
 }
 
-.top-wrapper {
+/* .top-wrapper {
   position: fixed;
   top: 2rem;
   width: 100vw;
   text-align: center;
   z-index: 10;
   pointer-events: auto;
-}
+} */
 
-.top-text {
+/* .top-text {
   display: inline-block;
   font-size: 2.3rem;
-  /* font-family: "hello-bloomie-serif", serif; */
-  /* font-family: "helvetica", sans-serif;
-        font-weight: 800; */
+  font-family: "hello-bloomie-serif", serif;
+  font-family: "helvetica", sans-serif;
+  font-weight: 800;
   font-family: "hello-bloomie-script", sans-serif;
   font-weight: 400;
   font-style: normal;
   letter-spacing: 5px;
-  color: currentColor; /* Same as wavy text */
-}
+  color: currentColor;
+} */
 
 /* For mobile devices */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .top-text {
-    font-size: 1.8rem; /* Adjust font size for mobile */
-    letter-spacing: 3px; /* Adjust letter spacing for mobile */
+    font-size: 1.8rem;
+    letter-spacing: 3px;
   }
-}
+} */
 
 .word {
   display: inline-block;
@@ -192,25 +193,45 @@ a:hover {
   }
 }
 
-#logo-link {
-  color: currentColor; /* or set a specific color if needed */
-  position: fixed;
-  bottom: 6rem;
+/* shared logo styles */
+.logo {
+  color: currentColor;
   display: inline-block;
-  width: 150px; /* adjust size as needed */
   height: auto;
   z-index: 1000;
   transition: transform 0.2s ease;
 }
 
-#logo-link:hover {
+.logo:hover {
   transform: scale(1.1);
+  color: currentColor;
 }
 
-#logo-link img {
+.logo img,
+.logo svg {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* individual overrides */
+#mixcloud-logo {
+  width: 165px;
+}
+
+#insta-logo {
+  width: 30px;
+}
+
+/* container */
+#logos-box {
+  position: fixed;
+  bottom: 6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  z-index: 1000;
 }
 
 #ticket-box {
