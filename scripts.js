@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const message = document.getElementById("refresh-message");
 
   const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  message.textContent = isTouchDevice ? "Tap to refresh!" : "Click to refresh!";
+  message.textContent = isTouchDevice ? "Tap/swipe to randomise!" : "Click/scroll to randomise!";
 
   const hidePopup = () => {
     popup.style.opacity = "0";
