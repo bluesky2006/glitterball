@@ -112,7 +112,7 @@ setInterval(() => {
   document.getElementById(`frame${currentFrame}`).classList.remove("visible");
   currentFrame = currentFrame === 1 ? 2 : 1;
   document.getElementById(`frame${currentFrame}`).classList.add("visible");
-}, 500);
+}, 700);
 
 // === Top Text Animation ===
 const topText = document.getElementById("topText");
