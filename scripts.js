@@ -171,9 +171,9 @@ document.addEventListener("DOMContentLoaded", function () {
 // === Insert scrolling text ===
 
 const eventDetails = {
-  date: "Saturday 20th September",
+  date: "Saturday 7th March 2026",
   time: "8pm – 2am",
-  price: "£15",
+  price: "£20",
   location: "Snag Farm • Snag Lane • BA9 9PJ",
 };
 
