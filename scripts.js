@@ -9,7 +9,7 @@ function getRandomColor() {
 }
 
 // === Generate Background Image Array ===
-const backgrounds = Array.from({ length: 73 }, (_, i) => `./backgrounds/bg${i + 1}.jpeg`);
+const backgrounds = Array.from({ length: 100 }, (_, i) => `./backgrounds/bg${i + 1}.jpg`);
 
 // === State Variables ===
 let currentIndex = Math.floor(Math.random() * backgrounds.length);
