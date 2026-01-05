@@ -41,15 +41,23 @@ function setBackground(index) {
   // ✅ Tickets box
   const ticketBox = document.getElementById("ticket-box");
   if (ticketBox) {
+    const contrast = getContrastColor(currentColor);
+
     ticketBox.style.backgroundColor = currentColor;
-    ticketBox.style.color = "white";
+    ticketBox.style.color = contrast; // ✅ contrast-aware text
     ticketBox.style.outlineColor = currentColor;
-    setInterval(() => {
-      ticketBox.classList.add("wiggle");
-      setTimeout(() => {
-        ticketBox.classList.remove("wiggle");
-      }, 600); // match animation duration
-    }, 5000); // every 5s
+
+    // ⚠️ prevent multiple intervals stacking
+    if (!ticketBox.dataset.wiggleInit) {
+      ticketBox.dataset.wiggleInit = "true";
+
+      setInterval(() => {
+        ticketBox.classList.add("wiggle");
+        setTimeout(() => {
+          ticketBox.classList.remove("wiggle");
+        }, 600);
+      }, 5000);
+    }
   }
 
   // ✅ Refresh popup box + outline
