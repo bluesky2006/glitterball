@@ -1,3 +1,4 @@
+/* Scrolling text */
 #scrolling-text {
   animation: scroll-left 15s linear infinite;
 }
@@ -20,6 +21,50 @@
   animation-delay: 0.6s;
 }
 
+/* Logo */
+.logo-art {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  max-height: 120vh;
+  height: auto;
+  transform: translateY(-2rem);
+}
+
+.st0 {
+  fill: currentColor;
+}
+
+/* Top text */
+.word {
+  display: inline-block;
+  margin: 0 1px;
+}
+
+.letter {
+  display: inline-block;
+  transition:
+    transform 0.9s ease,
+    opacity 1s ease;
+  cursor: pointer;
+}
+
+.letter.fall {
+  transform: translateY(150px) rotate(15deg);
+  opacity: 0;
+}
+
+/* Popup */
+#refresh-popup {
+  animation: rotateWiggle 0.66s steps(2, end) infinite;
+}
+
+/* Ticket animation */
+.wiggle {
+  animation: wiggle 0.2s ease-in-out 2;
+}
+
+/* Animations */
 @keyframes scroll-left {
   0% {
     transform: translateX(100vw);
@@ -39,61 +84,6 @@
   }
 }
 
-.st0 {
-  fill: currentColor;
-}
-
-.scrolling-text span {
-  display: inline-block;
-  animation: wave 1s ease-in-out infinite;
-}
-
-.scrolling-text span:nth-child(4n + 1) {
-  animation-delay: 0s;
-}
-
-.scrolling-text span:nth-child(4n + 2) {
-  animation-delay: 0.2s;
-}
-
-.scrolling-text span:nth-child(4n + 3) {
-  animation-delay: 0.4s;
-}
-
-.scrolling-text span:nth-child(4n + 4) {
-  animation-delay: 0.6s;
-}
-
-@keyframes wave {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.word {
-  display: inline-block;
-  margin: 0 1px; /* adjust second value for space between words */
-}
-
-.letter {
-  display: inline-block;
-  transition: transform 0.9s ease, opacity 1s ease;
-  cursor: pointer;
-}
-
-.letter.fall {
-  transform: translateY(150px) rotate(15deg);
-  opacity: 0;
-}
-
-#refresh-popup {
-  animation: rotateWiggle 0.66s steps(2, end) infinite;
-}
-
 @keyframes rotateWiggle {
   from {
     transform: translate(-50%, -50%) rotate(-2deg);
@@ -111,9 +101,4 @@
   50% {
     transform: translate(-50%, calc(-50% - 5px)) rotate(2deg);
   }
-}
-
-/* apply wiggle only when Tailwind's utility class is used */
-.wiggle {
-  animation: wiggle 0.2s ease-in-out 2; /* fast, repeat 4 times */
 }
