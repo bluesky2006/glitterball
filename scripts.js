@@ -178,20 +178,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // === Insert scrolling text ===
 
-const eventDetails = {
-  date: "Saturday 7th March 2026",
-  time: "8pm – 2am",
-  price: "£20",
-  location: "Snag Farm • Snag Lane • BA9 9PJ",
+const siteContent = {
+  plannedParty: null,
+  noPartyMessage:
+    "Thanks to everyone for making our last party so much fun! The next party will be on November 7th – save the date! 🎉",
 };
 
-const text = `${eventDetails.date} • ${eventDetails.time} • ${eventDetails.price} • ${eventDetails.location}`;
 const container = document.getElementById("scrolling-text");
 
-container.innerHTML = ""; // Clear any existing content
+function buildPartyText(party) {
+  return `${party.date} • ${party.time} • ${party.price} • ${party.location}`;
+}
 
-for (const char of text) {
-  const span = document.createElement("span");
-  span.innerHTML = char === " " ? "&nbsp;" : char;
-  container.appendChild(span);
+function renderScrollingText(text) {
+  container.innerHTML = "";
+
+  for (const char of text) {
+    const span = document.createElement("span");
+    span.innerHTML = char === " " ? "&nbsp;" : char;
+    container.appendChild(span);
+  }
+}
+
+if (container) {
+  const text = siteContent.plannedParty
+    ? buildPartyText(siteContent.plannedParty)
+    : siteContent.noPartyMessage;
+
+  if (siteContent.plannedParty?.mapUrl) {
+    container.href = siteContent.plannedParty.mapUrl;
+  } else {
+    container.removeAttribute("href");
+    container.removeAttribute("target");
+    container.removeAttribute("rel");
+    container.classList.add("pointer-events-none");
+  }
+
+  renderScrollingText(text);
 }
