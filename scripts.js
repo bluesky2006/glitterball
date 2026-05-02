@@ -11,7 +11,7 @@ const siteContent = {
   //   location: "Snag Farm - Snag Lane - BA9 9PJ",
   // },
   noPartyMessage:
-    "Thanks to everyone for making our last party so much fun! The next one will be on November 7th – save the date! 🎉",
+    "The next party will be on November 14th – save the date! 🎉",
 };
 
 const elements = {
