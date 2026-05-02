@@ -1,4 +1,4 @@
-const backgrounds = Array.from({ length: 100 }, (_, i) => `./backgrounds/bg${i + 1}.jpg`);
+const backgrounds = Array.from({ length: 73 }, (_, i) => `./backgrounds/bg${i + 1}.jpeg`);
 
 // === Update This Section For The Next Party ===
 const siteContent = {
@@ -10,8 +10,7 @@ const siteContent = {
   //   price: "£20",
   //   location: "Snag Farm - Snag Lane - BA9 9PJ",
   // },
-  noPartyMessage:
-    "The next party will be on November 14th – save the date! 🎉",
+  noPartyMessage: "The next party will be on November 14th – save the date! 🎉",
 };
 
 const elements = {
