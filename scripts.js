@@ -10,7 +10,7 @@ const siteContent = {
   //   price: "£20",
   //   location: "Snag Farm - Snag Lane - BA9 9PJ",
   // },
-  noPartyMessage: "The next party will be on November 14th – save the date! 🎉",
+  noPartyMessage: "The next party will be on November 14th – more information to come. Save the date! 🎉",
 };
 
 const elements = {
