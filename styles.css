@@ -9,27 +9,22 @@
   transition: opacity 0.8s ease;
 }
 
-/* Scrolling text */
+/* Info text */
 #scrolling-text {
-  animation: scroll-left 15s linear infinite;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.3s forwards, infoWiggle 0.9s steps(2, end) infinite;
+  padding: 0.35rem 1.1rem;
+  outline: 2px dashed;
+  letter-spacing: 0.04em;
 }
 
-#scrolling-text span {
-  display: inline-block;
-  animation: wave 1s ease-in-out infinite;
-}
-
-#scrolling-text span:nth-child(4n + 1) {
-  animation-delay: 0s;
-}
-#scrolling-text span:nth-child(4n + 2) {
-  animation-delay: 0.2s;
-}
-#scrolling-text span:nth-child(4n + 3) {
-  animation-delay: 0.4s;
-}
-#scrolling-text span:nth-child(4n + 4) {
-  animation-delay: 0.6s;
+@keyframes infoWiggle {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
 }
 
 /* Logo */
@@ -76,22 +71,9 @@
 }
 
 /* Animations */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(100vw);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes wave {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 

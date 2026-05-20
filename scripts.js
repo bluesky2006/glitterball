@@ -10,7 +10,7 @@ const siteContent = {
   //   price: "£20",
   //   location: "Snag Farm - Snag Lane - BA9 9PJ",
   // },
-  noPartyMessage: "The next party will be on November 14th – more information to come. Save the date! 🎉",
+  noPartyMessage: "The next party is November 14th - mark your calendars! 😊",
 };
 
 const elements = {
@@ -109,6 +109,12 @@ function applyAccentColor() {
     elements.refreshPopup.style.backgroundColor = currentColor;
     elements.refreshPopup.style.outlineColor = currentColor;
     elements.refreshPopup.style.color = getContrastColor(currentColor);
+  }
+
+  if (elements.scrollingText) {
+    elements.scrollingText.style.backgroundColor = currentColor;
+    elements.scrollingText.style.color = getContrastColor(currentColor);
+    elements.scrollingText.style.outlineColor = currentColor;
   }
 }
 
@@ -267,18 +273,6 @@ function buildPartyText(party) {
   return `${party.date} • ${party.time} • ${party.price} • ${party.location}`;
 }
 
-function renderScrollingText(text) {
-  if (!elements.scrollingText) return;
-
-  elements.scrollingText.innerHTML = "";
-
-  for (const char of text) {
-    const span = document.createElement("span");
-    span.textContent = char === " " ? "\u00A0" : char;
-    elements.scrollingText.appendChild(span);
-  }
-}
-
 function initScrollingText() {
   if (!elements.scrollingText) return;
 
@@ -286,12 +280,7 @@ function initScrollingText() {
     ? buildPartyText(siteContent.plannedParty)
     : siteContent.noPartyMessage;
 
-  elements.scrollingText.removeAttribute("href");
-  elements.scrollingText.removeAttribute("target");
-  elements.scrollingText.removeAttribute("rel");
-  elements.scrollingText.classList.add("pointer-events-none");
-
-  renderScrollingText(text);
+  elements.scrollingText.textContent = text;
 }
 
 function initInjectedLogos() {
