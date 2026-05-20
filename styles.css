@@ -1,3 +1,14 @@
+/* Background layers for crossfade */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  transition: opacity 0.8s ease;
+}
+
 /* Scrolling text */
 #scrolling-text {
   animation: scroll-left 15s linear infinite;

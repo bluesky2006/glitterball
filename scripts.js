@@ -26,6 +26,9 @@ const elements = {
 let currentIndex = Math.floor(Math.random() * backgrounds.length);
 let lastChangeTime = 0;
 let currentColor = "#FFFFFF";
+let bgLayerA = null;
+let bgLayerB = null;
+let activeBgLayer = "a";
 
 const throttleDuration = 800;
 
@@ -52,15 +55,23 @@ async function injectSvg(containerId, path) {
   }
 }
 
+function hslToHex(h, s, l) {
+  const sl = s / 100;
+  const ll = l / 100;
+  const a = sl * Math.min(ll, 1 - ll);
+  const f = (n) => {
+    const k = (n + h / 30) % 12;
+    const c = ll - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * c).toString(16).padStart(2, "0");
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
 function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-
-  return color;
+  const h = Math.floor(Math.random() * 360);
+  const s = 80 + Math.floor(Math.random() * 20);
+  const l = 55 + Math.floor(Math.random() * 20);
+  return hslToHex(h, s, l);
 }
 
 function getContrastColor(hex) {
@@ -101,9 +112,34 @@ function applyAccentColor() {
   }
 }
 
+function createBgLayers() {
+  bgLayerA = document.createElement("div");
+  bgLayerA.className = "bg-layer";
+  bgLayerA.style.opacity = "1";
+
+  bgLayerB = document.createElement("div");
+  bgLayerB.className = "bg-layer";
+  bgLayerB.style.opacity = "0";
+
+  document.body.prepend(bgLayerB);
+  document.body.prepend(bgLayerA);
+}
+
 function setBackground(index) {
   currentColor = getRandomColor();
-  document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+
+  const incoming = activeBgLayer === "a" ? bgLayerB : bgLayerA;
+  const outgoing = activeBgLayer === "a" ? bgLayerA : bgLayerB;
+
+  incoming.style.backgroundImage = `url('${backgrounds[index]}')`;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      incoming.style.opacity = "1";
+      outgoing.style.opacity = "0";
+    });
+  });
+
+  activeBgLayer = activeBgLayer === "a" ? "b" : "a";
   document.body.style.color = currentColor;
   applyAccentColor();
 }
@@ -129,6 +165,8 @@ function shouldIgnoreBackgroundChange(target) {
 }
 
 function initBackgroundRandomiser() {
+  createBgLayers();
+
   let touchStartY = 0;
 
   setBackground(currentIndex);
