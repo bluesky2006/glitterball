@@ -224,6 +224,21 @@ function initScrollingText() {
   elements.scrollingText.style.transform = `rotate(${angle}deg)`;
 }
 
+function initParallax() {
+  const strength = 18;
+
+  window.addEventListener('mousemove', (e) => {
+    const dx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    const dy = (e.clientY / window.innerHeight - 0.5) * 2;
+    const x = dx * strength;
+    const y = dy * strength;
+
+    [bgLayerA, bgLayerB].forEach(layer => {
+      if (layer) layer.style.transform = `scale(1.06) translate(${x}px, ${y}px)`;
+    });
+  });
+}
+
 function initInjectedLogos() {
   injectSvg("frame1-svg", "./logos/frame1.svg");
   injectSvg("frame2-svg", "./logos/frame2.svg");
@@ -234,6 +249,7 @@ function init() {
   initFrameAnimation();
   initScrollingText();
   initInjectedLogos();
+  initParallax();
 }
 
 document.addEventListener("DOMContentLoaded", init);
