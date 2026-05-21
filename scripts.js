@@ -221,6 +221,7 @@ function initScrollingText() {
   elements.scrollingText.textContent = text;
 
   const angle = (Math.random() * 14 - 7).toFixed(1);
+  elements.scrollingText.dataset.angle = angle;
   elements.scrollingText.style.transform = `rotate(${angle}deg)`;
 }
 
@@ -239,6 +240,36 @@ function initParallax() {
   });
 }
 
+function initPostItHover() {
+  if (!elements.scrollingText) return;
+
+  const base = parseFloat(elements.scrollingText.dataset.angle || 0);
+
+  elements.scrollingText.addEventListener('mouseenter', () => {
+    const nudge = (Math.random() * 6 - 3).toFixed(1);
+    elements.scrollingText.style.transform = `rotate(${parseFloat(nudge) + base}deg) scale(1.04)`;
+  });
+
+  elements.scrollingText.addEventListener('mouseleave', () => {
+    elements.scrollingText.style.transform = `rotate(${base}deg)`;
+  });
+}
+
+function initLogoShimmer() {
+  function shimmer() {
+    [elements.frame1, elements.frame2].forEach(frame => {
+      const svg = frame?.querySelector('svg');
+      if (!svg) return;
+      svg.classList.add('logo-shimmer');
+      setTimeout(() => svg.classList.remove('logo-shimmer'), 900);
+    });
+
+    setTimeout(shimmer, 3000 + Math.random() * 5000);
+  }
+
+  setTimeout(shimmer, 1500 + Math.random() * 2000);
+}
+
 function initInjectedLogos() {
   injectSvg("frame1-svg", "./logos/frame1.svg");
   injectSvg("frame2-svg", "./logos/frame2.svg");
@@ -249,6 +280,8 @@ function init() {
   initFrameAnimation();
   initScrollingText();
   initInjectedLogos();
+  initPostItHover();
+  initLogoShimmer();
   initParallax();
 }
 

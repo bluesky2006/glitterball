@@ -12,6 +12,9 @@
 
 /* Info text */
 #scrolling-text {
+  transition: transform 0.25s ease;
+  pointer-events: auto;
+  cursor: default;
   position: relative;
   opacity: 0;
   animation: fadeIn 0.8s ease 0.3s forwards;
@@ -47,6 +50,16 @@
 
 .st0 {
   fill: currentColor;
+}
+
+/* Logo shimmer */
+.logo-shimmer {
+  animation: logoShimmer 0.9s ease-in-out;
+}
+
+@keyframes logoShimmer {
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.6) drop-shadow(0 0 12px currentColor); }
 }
 
 /* Animations */
