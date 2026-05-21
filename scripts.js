@@ -15,9 +15,6 @@ const siteContent = {
 
 const elements = {
   ticketBox: document.getElementById("ticket-box"),
-  refreshPopup: document.getElementById("refresh-popup"),
-  refreshMessage: document.getElementById("refresh-message"),
-  topText: document.getElementById("topText"),
   scrollingText: document.getElementById("scrolling-text"),
   frame1: document.getElementById("frame1"),
   frame2: document.getElementById("frame2"),
@@ -76,9 +73,9 @@ function getRandomColor() {
 
 function getContrastColor(hex) {
   const normalizedHex = hex.replace("#", "");
-  const r = parseInt(normalizedHex.substr(0, 2), 16);
-  const g = parseInt(normalizedHex.substr(2, 2), 16);
-  const b = parseInt(normalizedHex.substr(4, 2), 16);
+  const r = parseInt(normalizedHex.substring(0, 2), 16);
+  const g = parseInt(normalizedHex.substring(2, 4), 16);
+  const b = parseInt(normalizedHex.substring(4, 6), 16);
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
   return luminance > 0.5 ? "black" : "white";
@@ -105,16 +102,9 @@ function applyAccentColor() {
     initTicketBoxWiggle(elements.ticketBox);
   }
 
-  if (elements.refreshPopup) {
-    elements.refreshPopup.style.backgroundColor = currentColor;
-    elements.refreshPopup.style.outlineColor = currentColor;
-    elements.refreshPopup.style.color = getContrastColor(currentColor);
-  }
-
   if (elements.scrollingText) {
     elements.scrollingText.style.backgroundColor = currentColor;
     elements.scrollingText.style.color = getContrastColor(currentColor);
-    elements.scrollingText.style.outlineColor = currentColor;
   }
 }
 
@@ -217,58 +207,6 @@ function initFrameAnimation() {
   }, 700);
 }
 
-function initTopTextAnimation() {
-  if (!elements.topText) return;
-
-  const words = ["another", "fine", "mess"];
-
-  words.forEach((word) => {
-    const wordSpan = document.createElement("span");
-    wordSpan.className = "word";
-
-    for (const letter of word) {
-      const letterSpan = document.createElement("span");
-      letterSpan.className = "letter";
-      letterSpan.textContent = letter;
-
-      letterSpan.addEventListener("mouseover", () => {
-        letterSpan.classList.add("fall");
-
-        setTimeout(() => {
-          letterSpan.classList.remove("fall");
-        }, 3000);
-      });
-
-      wordSpan.appendChild(letterSpan);
-    }
-
-    elements.topText.appendChild(wordSpan);
-    elements.topText.appendChild(document.createTextNode(" "));
-  });
-}
-
-function initRefreshPopup() {
-  if (!elements.refreshPopup || !elements.refreshMessage) return;
-
-  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  elements.refreshMessage.textContent = isTouchDevice
-    ? "Tap/swipe to randomise!"
-    : "Click/scroll to randomise!";
-
-  const hidePopup = () => {
-    elements.refreshPopup.style.opacity = "0";
-    elements.refreshPopup.style.pointerEvents = "none";
-    setTimeout(() => {
-      elements.refreshPopup.style.display = "none";
-    }, 500);
-  };
-
-  elements.refreshPopup.addEventListener("click", hidePopup);
-  elements.refreshPopup.addEventListener("touchstart", hidePopup);
-
-  setTimeout(hidePopup, 3000);
-}
-
 function buildPartyText(party) {
   return `${party.date} • ${party.time} • ${party.price} • ${party.location}`;
 }
@@ -294,10 +232,8 @@ function initInjectedLogos() {
 function init() {
   initBackgroundRandomiser();
   initFrameAnimation();
-  initTopTextAnimation();
   initScrollingText();
   initInjectedLogos();
-  initRefreshPopup();
 }
 
 document.addEventListener("DOMContentLoaded", init);

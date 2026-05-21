@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/nou3iun.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet" />
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
@@ -29,27 +29,11 @@
   <body
     class="m-0 p-0 h-full w-full flex justify-center items-center overflow-hidden"
   >
-    <!-- Pop-up box-->
-    <div
-      id="refresh-popup"
-      class="fixed bottom-72 left-1/2 text-white font-bloomie text-[26px] tracking-[2px] px-6 py-4 rounded-lg flex justify-center items-center text-center shadow-xl opacity-100 pointer-events-auto outline-dashed outline-3 z-[9999]"
-    >
-      <span id="refresh-message"></span>
-    </div>
-
-    <!-- Another fine mess -->
-    <!-- <div class="fixed top-8 w-screen text-center z-10 pointer-events-auto">
-      <div
-        id="topText"
-        class="inline-block text-[1.8rem] font-normal tracking-[5px] text-current font-[hello-bloomie-script] sm:text-[2.3rem]"
-      ></div>
-    </div> -->
-
     <!-- Glitterball logo animation -->
     <!-- Frame 1 -->
     <div
       id="frame1"
-      class="hidden justify-center items-center w-full h-full p-12 box-border [&.visible]:flex visible"
+      class="hidden justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex visible"
     >
       <div id="frame1-svg" class="logo-art" aria-hidden="true"></div>
     </div>
@@ -57,12 +41,12 @@
     <!-- Frame 2 -->
     <div
       id="frame2"
-      class="hidden justify-center items-center w-full h-full p-12 box-border [&.visible]:flex"
+      class="hidden justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex"
     >
       <div id="frame2-svg" class="logo-art" aria-hidden="true"></div>
     </div>
 
-    <!-- Ticket link -->
+    <!-- Ticket link (re-enable when tickets are available) -->
     <!-- <a
       href="https://buytickets.at/glitterball1/2006928"
       target="_blank"
@@ -74,10 +58,10 @@
     </a> -->
 
     <!-- Info text -->
-    <div class="fixed bottom-24 w-screen text-center pointer-events-none z-10 px-6">
+    <div class="fixed bottom-32 w-screen text-center pointer-events-none z-10 px-6">
       <p
         id="scrolling-text"
-        class="inline-block text-2xl font-normal max-w-sm leading-snug" style="font-family: 'Caveat', cursive;"
+        class="inline-block text-2xl font-normal max-w-[240px] leading-snug"
       ></p>
     </div>
 
@@ -89,7 +73,7 @@
         target="_blank"
         rel="noopener"
         aria-label="Glitterball on Mixcloud"
-        class="inline-block w-[165px] text-current transition-transform duration-200 ease-in-out hover:scale-110 hover:text-current"
+        class="inline-block w-[110px] text-current transition-transform duration-200 ease-in-out hover:scale-110 hover:text-current"
       >
         <svg viewBox="0 0 171 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

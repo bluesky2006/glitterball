@@ -18,6 +18,7 @@
   border-radius: 2px;
   letter-spacing: 0.04em;
   box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.45), 1px 1px 0 rgba(0, 0, 0, 0.1);
+  font-family: 'Caveat', cursive;
 }
 
 #scrolling-text::before {
@@ -28,11 +29,10 @@
   transform: translateX(-50%) rotate(1deg);
   width: 44px;
   height: 22px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(240, 220, 180, 0.55);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 1px;
 }
-
 
 /* Logo */
 .logo-art {
@@ -48,35 +48,6 @@
   fill: currentColor;
 }
 
-/* Top text */
-.word {
-  display: inline-block;
-  margin: 0 1px;
-}
-
-.letter {
-  display: inline-block;
-  transition:
-    transform 0.9s ease,
-    opacity 1s ease;
-  cursor: pointer;
-}
-
-.letter.fall {
-  transform: translateY(150px) rotate(15deg);
-  opacity: 0;
-}
-
-/* Popup */
-#refresh-popup {
-  animation: rotateWiggle 0.66s steps(2, end) infinite;
-}
-
-/* Ticket animation */
-.wiggle {
-  animation: wiggle 0.2s ease-in-out 2;
-}
-
 /* Animations */
 @keyframes fadeIn {
   to {
@@ -84,21 +55,13 @@
   }
 }
 
-@keyframes rotateWiggle {
-  from {
-    transform: translate(-50%, -50%) rotate(-2deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(2deg);
-  }
+/* Ticket box */
+.wiggle {
+  animation: wiggle 0.2s ease-in-out 2;
 }
 
 @keyframes wiggle {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) rotate(-2deg);
-  }
-  50% {
-    transform: translate(-50%, calc(-50% - 5px)) rotate(2deg);
-  }
+  0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); }
+  50%       { transform: translate(-50%, calc(-50% - 5px)) rotate(2deg); }
 }
+
