@@ -52,6 +52,25 @@
   fill: currentColor;
 }
 
+/* Sound toggle */
+#sound-toggle {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background: none;
+  border: none;
+  color: currentColor;
+  cursor: pointer;
+  opacity: 0.85;
+  z-index: 1000;
+  padding: 0;
+  width: 28px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#sound-toggle:hover { opacity: 1; transform: scale(1.15); }
+#sound-toggle.muted { opacity: 0.4; }
+
 /* Logo shimmer */
 .logo-shimmer {
   animation: logoShimmer 0.9s ease-in-out;
