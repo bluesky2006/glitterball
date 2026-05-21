@@ -281,6 +281,9 @@ function initScrollingText() {
     : siteContent.noPartyMessage;
 
   elements.scrollingText.textContent = text;
+
+  const angle = (Math.random() * 14 - 7).toFixed(1);
+  elements.scrollingText.style.transform = `rotate(${angle}deg)`;
 }
 
 function initInjectedLogos() {

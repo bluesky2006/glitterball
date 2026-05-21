@@ -11,21 +11,28 @@
 
 /* Info text */
 #scrolling-text {
+  position: relative;
   opacity: 0;
-  animation: fadeIn 0.8s ease 0.3s forwards, infoWiggle 0.9s steps(2, end) infinite;
-  padding: 0.35rem 1.1rem;
-  outline: 2px dashed;
+  animation: fadeIn 0.8s ease 0.3s forwards;
+  padding: 1rem 1.4rem 1.2rem;
+  border-radius: 2px;
   letter-spacing: 0.04em;
+  box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.45), 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-@keyframes infoWiggle {
-  from {
-    transform: rotate(-2deg);
-  }
-  to {
-    transform: rotate(2deg);
-  }
+#scrolling-text::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 44px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
 }
+
 
 /* Logo */
 .logo-art {
