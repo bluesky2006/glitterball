@@ -270,6 +270,64 @@ function initLogoShimmer() {
   setTimeout(shimmer, 1500 + Math.random() * 2000);
 }
 
+function initGlitterRain() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:5;';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const COUNT = 40;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function makeParticle(randomY = false) {
+    return {
+      originX:      Math.random() * canvas.width,
+      y:            randomY ? Math.random() * canvas.height : -4,
+      size:         1 + Math.random() * 2,
+      speed:        0.1 + Math.random() * 0.35,
+      swayFreq:     0.3 + Math.random() * 0.6,
+      swayAmp:      20 + Math.random() * 40,
+      swayPhase:    Math.random() * Math.PI * 2,
+      sparkleFreq:  3 + Math.random() * 5,
+      sparklePhase: Math.random() * Math.PI * 2,
+    };
+  }
+
+  resize();
+  let particles = Array.from({ length: COUNT }, () => makeParticle(true));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const now = Date.now() / 1000;
+
+    for (const p of particles) {
+      const opacity = 0.2 + 0.8 * Math.abs(Math.sin(now * p.sparkleFreq + p.sparklePhase));
+      const x = p.originX + Math.sin(now * p.swayFreq + p.swayPhase) * p.swayAmp;
+
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = currentColor;
+      ctx.translate(x, p.y);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+      ctx.restore();
+
+      p.y += p.speed;
+
+      if (p.y > canvas.height + 4) Object.assign(p, makeParticle());
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+  window.addEventListener('resize', resize);
+}
+
 function initInjectedLogos() {
   injectSvg("frame1-svg", "./logos/frame1.svg");
   injectSvg("frame2-svg", "./logos/frame2.svg");
@@ -283,6 +341,7 @@ function init() {
   initPostItHover();
   initLogoShimmer();
   initParallax();
+  initGlitterRain();
 }
 
 document.addEventListener("DOMContentLoaded", init);
