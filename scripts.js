@@ -276,7 +276,7 @@ function initGlitterRain() {
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
-  const COUNT = 40;
+  const COUNT = 70;
 
   function resize() {
     canvas.width  = window.innerWidth;
@@ -287,7 +287,7 @@ function initGlitterRain() {
     return {
       originX:      Math.random() * canvas.width,
       y:            randomY ? Math.random() * canvas.height : -4,
-      size:         1 + Math.random() * 2,
+      size:         1.5 + Math.random() * 3,
       speed:        0.1 + Math.random() * 0.35,
       swayFreq:     0.3 + Math.random() * 0.6,
       swayAmp:      20 + Math.random() * 40,
