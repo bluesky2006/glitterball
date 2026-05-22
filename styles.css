@@ -42,8 +42,8 @@
 .logo-art {
   display: block;
   width: 100%;
-  max-width: 800px;
-  max-height: 120vh;
+  max-width: min(85vw, 1400px);
+  max-height: 65vh;
   height: auto;
   transform: translateY(-2rem);
 }
