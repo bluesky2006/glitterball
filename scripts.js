@@ -15,7 +15,7 @@ const siteContent = {
 
 const elements = {
   ticketBox: document.getElementById("ticket-box"),
-  scrollingText: document.getElementById("scrolling-text"),
+  postIt: document.getElementById("scrolling-text"),
   frame1: document.getElementById("frame1"),
   frame2: document.getElementById("frame2"),
 };
@@ -102,9 +102,9 @@ function applyAccentColor() {
     initTicketBoxWiggle(elements.ticketBox);
   }
 
-  if (elements.scrollingText) {
-    elements.scrollingText.style.backgroundColor = currentColor;
-    elements.scrollingText.style.color = getContrastColor(currentColor);
+  if (elements.postIt) {
+    elements.postIt.style.backgroundColor = currentColor;
+    elements.postIt.style.color = getContrastColor(currentColor);
   }
 }
 
@@ -211,18 +211,18 @@ function buildPartyText(party) {
   return `${party.date} • ${party.time} • ${party.price} • ${party.location}`;
 }
 
-function initScrollingText() {
-  if (!elements.scrollingText) return;
+function initPostIt() {
+  if (!elements.postIt) return;
 
   const text = siteContent.plannedParty
     ? buildPartyText(siteContent.plannedParty)
     : siteContent.noPartyMessage;
 
-  elements.scrollingText.textContent = text;
+  elements.postIt.textContent = text;
 
   const angle = (Math.random() * 14 - 7).toFixed(1);
-  elements.scrollingText.dataset.angle = angle;
-  elements.scrollingText.style.transform = `rotate(${angle}deg)`;
+  elements.postIt.dataset.angle = angle;
+  elements.postIt.style.transform = `rotate(${angle}deg)`;
 }
 
 function initParallax() {
@@ -241,17 +241,17 @@ function initParallax() {
 }
 
 function initPostItHover() {
-  if (!elements.scrollingText) return;
+  if (!elements.postIt) return;
 
-  const base = parseFloat(elements.scrollingText.dataset.angle || 0);
+  const base = parseFloat(elements.postIt.dataset.angle || 0);
 
-  elements.scrollingText.addEventListener('mouseenter', () => {
+  elements.postIt.addEventListener('mouseenter', () => {
     const nudge = (Math.random() * 6 - 3).toFixed(1);
-    elements.scrollingText.style.transform = `rotate(${parseFloat(nudge) + base}deg) scale(1.04)`;
+    elements.postIt.style.transform = `rotate(${parseFloat(nudge) + base}deg) scale(1.04)`;
   });
 
-  elements.scrollingText.addEventListener('mouseleave', () => {
-    elements.scrollingText.style.transform = `rotate(${base}deg)`;
+  elements.postIt.addEventListener('mouseleave', () => {
+    elements.postIt.style.transform = `rotate(${base}deg)`;
   });
 }
 
@@ -283,6 +283,20 @@ function initGlitterRain() {
     canvas.height = window.innerHeight;
   }
 
+  // Silver/white base with noticeable iridescent colour pops
+  const GLITTER_PALETTE = [
+    '#FFFFFF', '#FFFFFF',
+    '#E0E0E0', '#E0E0E0',
+    '#88C8FF',  // icy blue
+    '#88C8FF',
+    '#FFD080',  // warm gold
+    '#FFD080',
+    '#FF9EC8',  // rose pink
+    '#FF9EC8',
+    '#90FFD8',  // mint teal
+    '#C8A8FF',  // soft lavender
+  ];
+
   function makeParticle(randomY = false) {
     return {
       originX:      Math.random() * canvas.width,
@@ -294,6 +308,7 @@ function initGlitterRain() {
       swayPhase:    Math.random() * Math.PI * 2,
       sparkleFreq:  3 + Math.random() * 5,
       sparklePhase: Math.random() * Math.PI * 2,
+      color:        GLITTER_PALETTE[Math.floor(Math.random() * GLITTER_PALETTE.length)],
     };
   }
 
@@ -305,15 +320,25 @@ function initGlitterRain() {
     const now = Date.now() / 1000;
 
     for (const p of particles) {
-      const opacity = 0.2 + 0.8 * Math.abs(Math.sin(now * p.sparkleFreq + p.sparklePhase));
+      const sparkleVal = Math.abs(Math.sin(now * p.sparkleFreq + p.sparklePhase));
+      const opacity = sparkleVal;  // full range 0→1 for sharper flash
+      const size = p.size * (0.4 + 0.6 * sparkleVal);  // grow with brightness
       const x = p.originX + Math.sin(now * p.swayFreq + p.swayPhase) * p.swayAmp;
 
       ctx.save();
       ctx.globalAlpha = opacity;
-      ctx.fillStyle = currentColor;
+
+      // Glow halo on the bright half of the cycle
+      if (sparkleVal > 0.5) {
+        ctx.shadowColor = '#FFFFFF';
+        ctx.shadowBlur = 4 + sparkleVal * 10;
+      }
+
+      // Flash to white at peak
+      ctx.fillStyle = sparkleVal > 0.85 ? '#FFFFFF' : p.color;
       ctx.translate(x, p.y);
       ctx.rotate(Math.PI / 4);
-      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+      ctx.fillRect(-size / 2, -size / 2, size, size);
       ctx.restore();
 
       p.y += p.speed;
@@ -399,7 +424,7 @@ function initInjectedLogos() {
 function init() {
   initBackgroundRandomiser();
   initFrameAnimation();
-  initScrollingText();
+  initPostIt();
   initInjectedLogos();
   initPostItHover();
   initLogoShimmer();
