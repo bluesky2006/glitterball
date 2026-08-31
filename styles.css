@@ -38,6 +38,15 @@
   border-radius: 1px;
 }
 
+/* Repeating faded echo behind the main logo (offset up-left, fading out) */
+#frame1-svg,
+#frame2-svg {
+  filter:
+    drop-shadow(-8px -9px 0 rgba(120, 45, 170, 0.45))
+    drop-shadow(-16px -18px 0 rgba(120, 45, 170, 0.26))
+    drop-shadow(-24px -27px 0 rgba(120, 45, 170, 0.14));
+}
+
 /* Logo */
 .logo-art {
   display: block;
@@ -52,11 +61,71 @@
   fill: currentColor;
 }
 
+/* Ticket button — gritty retro ticket stub: solid block, hard shadow, punched
+   side notches + a dashed perforation line between the label and the date */
+.ticket-btn {
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2.5deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 34px 12px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 10;
+  background: #ff3da6;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.7);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  /* Punch a semicircle out of the left and right edges (true cut-outs) */
+  --notch: 9px;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  mask-composite: intersect;
+}
+
+/* Press-in effect on hover */
+.ticket-btn:hover {
+  transform: translate(calc(-50% + 3px), calc(-50% + 3px)) rotate(-2.5deg);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.ticket-btn__label {
+  font-family: "hello-bloomie-serif", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #0b0b0f;
+  padding-bottom: 6px;
+}
+
+.ticket-btn__date {
+  width: 100%;
+  text-align: center;
+  padding-top: 6px;
+  /* Perforation / tear line separating the stub */
+  border-top: 2px dashed rgba(11, 11, 15, 0.6);
+  font-family: "Caveat", cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #0b0b0f;
+}
+
 /* Sound toggle */
 #sound-toggle {
   position: fixed;
-  bottom: 2rem;
-  left: 2rem;
+  bottom: 3.5rem;
+  left: 3.5rem;
   background: none;
   border: none;
   color: currentColor;
@@ -88,13 +157,4 @@
   }
 }
 
-/* Ticket box */
-.wiggle {
-  animation: wiggle 0.2s ease-in-out 2;
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); }
-  50%       { transform: translate(-50%, calc(-50% - 5px)) rotate(2deg); }
-}
 

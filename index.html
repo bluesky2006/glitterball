@@ -29,11 +29,19 @@
   <body
     class="m-0 p-0 h-full w-full flex justify-center items-center overflow-hidden"
   >
+    <!-- Decorative stroke frame around the viewport edge -->
+    <svg
+      id="border-frame"
+      class="fixed inset-0 w-full h-full pointer-events-none z-[900]"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    ></svg>
+
     <!-- Glitterball logo animation -->
     <!-- Frame 1 -->
     <div
       id="frame1"
-      class="hidden justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex visible"
+      class="hidden relative z-20 pointer-events-none justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex visible"
     >
       <div id="frame1-svg" class="logo-art" aria-hidden="true"></div>
     </div>
@@ -41,24 +49,28 @@
     <!-- Frame 2 -->
     <div
       id="frame2"
-      class="hidden justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex"
+      class="hidden relative z-20 pointer-events-none justify-center items-center w-full h-full p-6 sm:p-12 box-border [&.visible]:flex"
     >
       <div id="frame2-svg" class="logo-art" aria-hidden="true"></div>
     </div>
 
     <!-- Ticket link (re-enable when tickets are available) -->
-    <!-- <a
-      href="https://buytickets.at/glitterball1/2006928"
+    <a
+      href="https://buytickets.at/glitterball1/2387489"
       target="_blank"
       rel="noopener"
       id="ticket-box"
-      class="fixed top-[75%] left-1/2 -translate-x-1/2 translate-y-[-50%] text-white font-bloomie text-xl tracking-widest px-8 py-4 rounded-lg flex justify-center items-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.2)] cursor-pointer transition-transform duration-200 hover:translate-y-[calc(-50%_-_10px)] outline-dashed outline-3 outline-current no-underline"
+      class="ticket-btn"
     >
-      Tickets
-    </a> -->
+      <span class="ticket-btn__label">Get Tickets</span>
+      <span id="ticket-date" class="ticket-btn__date"></span>
+    </a>
 
-    <!-- Info text -->
-    <div class="fixed bottom-32 w-screen text-center pointer-events-none z-10 px-6">
+    <!-- Post-it note (hold-it note). Toggle via siteContent.showPostIt in scripts.js -->
+    <div
+      id="post-it-wrap"
+      class="hidden fixed bottom-32 w-screen text-center pointer-events-none z-10 px-6"
+    >
       <p
         id="scrolling-text"
         class="inline-block text-2xl font-normal max-w-[240px] leading-snug"
@@ -66,7 +78,7 @@
     </div>
 
     <!-- Social logos -->
-    <div class="fixed bottom-8 flex flex-row items-center gap-8 z-[1000]">
+    <div class="fixed bottom-16 flex flex-row items-center gap-8 z-[1000]">
       <!-- Mixcloud logo -->
       <a
         href="https://www.mixcloud.com/_Glitterball_/"
